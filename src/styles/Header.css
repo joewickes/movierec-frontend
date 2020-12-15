@@ -1,0 +1,35 @@
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-bottom: .01px solid #fff203da;
+}
+
+.header-left {
+  width: 100%;
+  padding: 20px;
+}
+
+.header-right {
+  width: 250px;
+  padding: 20px;
+}
+
+.header-right nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-right nav a {
+  text-decoration: none;
+}
+
+.header-right nav a:hover {
+  text-decoration: underline;
+}
+
+.account {
+  text-align: right;
+}

@@ -1,0 +1,28 @@
+.Post {
+  display: flex;
+  flex-direction: column;
+  border: .1px solid #aaa;
+  margin: 30px 30px 0px 30px;
+  padding: 10px;
+  color: #aaa;
+}
+
+.post-top {
+  color: #fff203da;
+}
+
+.post-bottom {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.uv-dv-buttons {
+  width: 50px;
+}
+
+.uv-dv-buttons button {
+  width: 50%;
+  color: #fff203da;
+}
+

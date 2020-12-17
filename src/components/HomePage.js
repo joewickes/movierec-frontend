@@ -1,18 +1,26 @@
+// Dependencies
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
-import Header from './Header';
+// Components
+import SearchFilter from './SearchFilter';
+import PostList from './PostList';
+
+// Styles
+import './../styles/HomePage.css';
 
 class HomePage extends React.Component {
   render() {
 
-
+    
 
     return (
       <>
-        <Header />
+        <SearchFilter />
+        <PostList />
       </>
     );
   }
 }
 
-export default HomePage;
+export default withRouter(HomePage);

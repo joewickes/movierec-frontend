@@ -1,0 +1,19 @@
+.search-filter {
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border-bottom: .1px solid #aaa;
+}
+
+.search-bar {
+  border: .1px solid #aaaaaa;
+  color: #aaaaaa;
+  padding: 7px;
+}
+
+.genres {
+  border: .1px solid #aaaaaa;
+  color: #aaaaaa;
+}
+

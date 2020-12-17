@@ -1,8 +1,11 @@
 * {
-  background-color: #1a1a1af1;
-  color: #fff203da;
-  font-weight: 100px;
+  background-color: #262626;
   font-family: sans-serif;
   margin: 0px;
   padding: 0px;
 }
+
+.App {
+  width: 100vw;
+}
+

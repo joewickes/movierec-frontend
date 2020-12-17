@@ -1,22 +1,27 @@
+// Dependencies
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+// Styles
 import './../styles/Header.css';
 
 class Header extends React.Component {
   
   state = {
-    loggedIn: true,
+    loggedIn: false,
   }
   
   render() {
     return (
       <header>
         <section className="header-left">
-          <p>MovieRec</p>
+          <NavLink to="/"><p>MovieRec</p></NavLink>
         </section>
         <section className="header-right">
-          {this.state.loggedIn ? <a className="account">Account</a> : <nav>
-            <a href="#">Log In</a>
-            <a href="#">Sign Up</a>
+          {this.state.loggedIn ?<nav><NavLink to="/accounts/:account-id"><p>Account</p></NavLink></nav> : 
+          <nav>
+            <NavLink to="/forms/log-in"><p>Log In</p></NavLink>
+            <NavLink to="/forms/sign-up"><p>Sign Up</p></NavLink>
           </nav>}
         </section>
       </header>

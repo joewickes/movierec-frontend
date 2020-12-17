@@ -7,23 +7,40 @@ header {
   border-bottom: .01px solid #fff203da;
 }
 
+header * {
+  background-color: #1a1a1a;
+  color: #fff203da;
+}
+
+.header-sections {
+  display: flex;
+}
+
 .header-left {
-  width: 100%;
+  flex: 2;
   padding: 20px;
 }
 
+.header-left a {
+  text-decoration: none;
+}
+
 .header-right {
-  width: 250px;
+  flex: 1;
   padding: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .header-right nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 130px;
 }
 
 .header-right nav a {
   text-decoration: none;
+  width: 60px;
 }
 
 .header-right nav a:hover {

@@ -5,7 +5,18 @@ import { withRouter } from 'react-router-dom';
 class SignUpPage extends React.Component {
   render() {
     return(
-      <h2>Sign Up Page</h2>
+      <main>
+        <h2>Sign Up</h2>
+        <form className="log-in-form">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" />
+          <label for="password">Password</label>
+          <input type="password" id="pwd1" name="pwd1" />
+          <label for="password">Re-Enter Password</label>
+          <input type="password" id="pwd2" name="pwd2" />
+          <button type="submit">Submit</button>
+        </form>
+      </main>
     );
   }
 }

@@ -14,6 +14,7 @@ class NewRecPage extends React.Component {
     selected: '',
     title: '',
     genre: '',
+    yn: 'yn',
     user: 'user1',
   }
 
@@ -64,7 +65,6 @@ class NewRecPage extends React.Component {
     })
   }
 
-
   // Fetch movies matching the title keywords
   getMatchingMovies = () => {
     return fetch(`http://localhost:8000/api/movies?search=${this.state.search}`)
@@ -73,6 +73,8 @@ class NewRecPage extends React.Component {
         return res.json();
       })
   }
+
+  // Fetch post matching movie (if 404, create new post)
 
   // Handle submitting the title form
   handleTitleSubmit = (e) => {
@@ -101,6 +103,7 @@ class NewRecPage extends React.Component {
   handleSelectSubmit = (e) => {
     e.preventDefault();
 
+    this.setState({loading: true});
     console.log('Submit with movie already in the database');
   }
 
@@ -108,6 +111,7 @@ class NewRecPage extends React.Component {
   handleNewMovieSubmit = (e) => {
     e.preventDefault();
 
+    this.setState({loading: true});
     console.log('Submit new movie for people to enjoy!');
   }
 
@@ -164,6 +168,17 @@ class NewRecPage extends React.Component {
           <option value="Thriller">Thriller</option>
           <option value="Western">Western</option>
         </select>
+        <div>
+          <p>Would you like to recommend this movie now?</p>
+          <label>
+            <input className="recommend-yn" type="radio" name="recommend-yn" value="Yes" defaultChecked />
+            Yes
+          </label>
+          <label>
+            <input className="recommend-yn" type="radio" name="recommend-yn" value="No" />
+            No
+          </label>
+        </div>
         <button type="submit">Submit</button>
       </form>);
   }
@@ -188,9 +203,6 @@ class NewRecPage extends React.Component {
   }
   
   render() {
-
-
-
     return (
       <main>
         <h2>Add a Recommendation</h2>

@@ -7,8 +7,6 @@ import './../styles/SearchFilter.css';
 class SearchFilter extends React.Component {
   render() {
 
-    
-
     return (
       <section className="search-filter">
         <form className="search-form">

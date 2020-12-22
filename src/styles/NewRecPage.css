@@ -2,3 +2,8 @@
   display: flex;
   flex-direction: column;
 }
+
+/* MAKE TEXT WHITE FOR FORMS */
+* {
+  color: #fff;
+}

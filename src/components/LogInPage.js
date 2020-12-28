@@ -2,10 +2,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+// Style
+import './../styles/LogInPage.css';
+
 class LogInPage extends React.Component {
   render() {
     return(
-      <main>
+      <main className="LogInPage">
         <h2>Log In</h2>
         <form className="log-in-form">
           <label for="username">Username</label>

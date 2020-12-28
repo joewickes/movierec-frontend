@@ -1,0 +1,14 @@
+.LogInPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LogInPage h2 {
+  padding: 20px 0px;
+}
+
+.LogInPage form {
+  display: flex;
+  flex-direction: column;
+}

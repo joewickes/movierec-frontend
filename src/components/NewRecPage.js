@@ -204,7 +204,7 @@ class NewRecPage extends React.Component {
   
   render() {
     return (
-      <main>
+      <main className="NewRecPage">
         <h2>Add a Recommendation</h2>
         {this.chooseForm()}
       </main>

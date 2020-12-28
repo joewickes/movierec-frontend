@@ -1,0 +1,12 @@
+.welcome {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-position: inside;
+  border-bottom: .1px solid #aaa;
+}
+
+.welcome-text p, .welcome-text ul {
+  padding: 20px;
+}

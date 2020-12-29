@@ -13,3 +13,63 @@
   flex-direction: column;
   align-items: center;
 }
+
+.NewRecPage h2 {
+  padding: 20px 0px;
+}
+
+/* ALL NEWRECPAGE BUTTON STYLING */
+.movie-search-btn {
+  width: 150px;
+  background-color: #fff203da;
+  color: #1a1a1a;
+  border: 1px solid #fff203da;
+  padding: 10px;
+  margin-top: 30px;
+}
+
+/* FORMS */
+
+.new-title-search-form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Make radio buttons disappear and click with hover */
+
+input[type="radio"] {
+  
+}
+
+.radio-btn-container {
+  height: 50px;
+  display: flex;
+}
+
+.radio-selects {
+  width: 100%;
+  border: 1px solid #aaa;
+  padding: 8px;
+  margin-top: 20px;
+}
+
+.radio-selects:hover {
+  background-color: #fff203da;
+  color: #1a1a1a;
+}
+
+.radio-selects:checked {
+  background-color: #fff203da;
+}
+
+
+/* INPUTS */
+
+.new-title-search {
+  width: 100%;
+  border: 1px solid #aaa;
+  padding: 8px;
+  margin-top: 20px;
+}

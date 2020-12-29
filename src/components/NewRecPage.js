@@ -2,7 +2,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import '../styles/NewRecPage.css';
+import './../styles/NewRecPage.css';
 
 class NewRecPage extends React.Component {
 
@@ -42,7 +42,6 @@ class NewRecPage extends React.Component {
 
   // Update title in state as it's typed
   updateTitle = (e) => {
-    console.log('title', e.target.value);
     this.setState({
       title: e.target.value,
     });
@@ -50,8 +49,6 @@ class NewRecPage extends React.Component {
 
   // Update year in state as it's typed
   updateYear = (e) => {
-    console.log('year', e.target.value);
-
     this.setState({
       year: e.target.value,
     })
@@ -59,7 +56,6 @@ class NewRecPage extends React.Component {
 
   // Update genre in state as it's selected
   updateGenre = (e) => {
-    console.log('genre', e.target.value);
     this.setState({
       genre: e.target.value,
     })
@@ -69,7 +65,6 @@ class NewRecPage extends React.Component {
   getMatchingMovies = () => {
     return fetch(`http://localhost:8000/api/movies?search=${this.state.search}`)
       .then(res => {
-        console.log(res);
         return res.json();
       })
   }
@@ -120,9 +115,8 @@ class NewRecPage extends React.Component {
   makeTitleSearchForm = () => {
     return (
       <form className="new-title-search-form" onSubmit={this.handleTitleSubmit}>
-        <label htmlFor="new-title-search">Movie Title</label>
-        <input onChange={this.updateSearch} type="text"></input>
-        <button type="submit">Search</button>
+        <input className="new-title-search" onChange={this.updateSearch} type="text" placeholder="Movie Title" />
+        <button type="submit" className="movie-search-btn">SEARCH</button>
       </form>
     )
   }
@@ -133,21 +127,21 @@ class NewRecPage extends React.Component {
       <form className="old-post-search-form" onChange={this.updateSelect} onSubmit={this.handleSelectSubmit}>
         {this.state.matches.map(match => {
           return (
-            <div key={match.id}>
-              <label htmlFor={match.id}>
+            <div key={match.id} className="radio-btn-container">
+              <label htmlFor={match.id} className="radio-selects">
               <input  type="radio" id={match.id} name="old-post-search" value={match.id} />
               {match.original_title}
               </label>
             </div>
           );
         })}
-        <button type="submit">Submit</button>
+        <button type="submit" className="movie-search-btn">SUBMIT</button>
         <div>
           <p>Don't see the right movie?</p>
-          <button onClick={this.handleNewMovieStart}>Add a Movie</button>
+          <button onClick={this.handleNewMovieStart} className="movie-search-btn">ADD A MOVIE</button>
         </div>
       </form>
-    );
+    ); 
   }
 
   // New movie form
@@ -179,7 +173,7 @@ class NewRecPage extends React.Component {
             No
           </label>
         </div>
-        <button type="submit">Submit</button>
+        <button className="movie-search-btn" type="submit">SUBMIT</button>
       </form>);
   }
 

@@ -11,11 +11,9 @@ class LogInPage extends React.Component {
       <main className="LogInPage">
         <h2>Log In</h2>
         <form className="log-in-form">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" />
-          <label for="password">Password</label>
-          <input type="password" id="pwd" name="pwd" />
-          <button type="submit">Submit</button>
+          <input type="text" className="username" name="username" placeholder="Username" />
+          <input type="password" className="pwd1" name="pwd" placeholder="Password" />
+          <button className="log-in-btn" type="submit">LOG IN</button>
         </form>
       </main>
     );

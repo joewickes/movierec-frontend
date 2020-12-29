@@ -11,8 +11,10 @@
 }
 
 .new-button {
-  border: .1px solid #aaaaaa;
-  color: #aaaaaa;
-  padding: 10px;
+  background-color: #fff203da;
+  color: #1a1a1a;
+  border: 1px solid #fff203da;
+  padding: 10px 40px;
   margin-top: 25px;
 }
+

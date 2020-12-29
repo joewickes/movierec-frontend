@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} 
 
 .SignUpPage h2 {
   padding: 20px 0px;
@@ -11,4 +11,39 @@
 .SignUpPage form {
   display: flex;
   flex-direction: column;
+}
+
+/* SIGN UP FORM */
+
+.log-in-form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.su-input-boxes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Username and Password sections */
+.username, .email, .pwd1, .pwd2 {
+  width: 100%;
+  border: 1px solid #aaa;
+  padding: 8px;
+  margin-top: 20px;
+}
+
+/* Sign Up Submit Button */
+
+.sign-up-btn {
+  width: 150px;
+  background-color: #fff203da;
+  color: #1a1a1a;
+  border: 1px solid #fff203da;
+  padding: 10px;
+  margin-top: 30px;
 }

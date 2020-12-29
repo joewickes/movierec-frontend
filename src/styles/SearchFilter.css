@@ -6,14 +6,37 @@
   border-bottom: .1px solid #aaa;
 }
 
+.search-form-container {
+  flex: 1;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex: 1;
+}
+
 .search-bar {
+  width: 60%;
+  align-self: flex-end;
   border: .1px solid #aaaaaa;
   color: #aaaaaa;
-  padding: 7px;
+  padding: 8px;
+  justify-self: flex-end;
+}
+
+.genres-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .genres {
+  width: 100px;
   border: .1px solid #aaaaaa;
-  color: #aaaaaa;
+  color: #aaa;
+  padding: 7px;
 }
 

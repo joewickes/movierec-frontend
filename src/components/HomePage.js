@@ -16,10 +16,6 @@ class HomePage extends React.Component {
     visited: false
   }
 
-  componentDidMount() {
-
-  }
-
   render() {
 
     return (

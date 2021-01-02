@@ -56,6 +56,7 @@ class SignUpPage extends React.Component {
 
     usersService.postNewUser(newUser)
       .then(res => {
+        console.log('RES from SignUpPage', res);
         if (res && res.error) {
           this.setState({error: res.error});
         } else {
@@ -64,6 +65,7 @@ class SignUpPage extends React.Component {
         
       })
       .catch(error => {
+        this.setState({error: error.message});
         console.log('SignUpPageError', error);
       })
 

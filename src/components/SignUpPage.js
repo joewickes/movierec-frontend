@@ -1,7 +1,6 @@
 // Dependencies
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
 
 // Local
 import usersService from './../services/users-service';
@@ -51,15 +50,17 @@ class SignUpPage extends React.Component {
     const newUser = {
       username: window.btoa(username.value),
       email: window.btoa(email.value),
-      password: bcrypt.hashSync(pwd1.value, 12),
+      password: window.btoa(pwd1.value),
     }
 
     usersService.postNewUser(newUser)
       .then(res => {
         console.log('RES from SignUpPage', res);
         if (res && res.error) {
+          console.log('running res error', res)
           this.setState({error: res.error});
         } else {
+          console.log('running res push', res)
           this.props.history.push('/forms/log-in');
         }
         
@@ -75,7 +76,6 @@ class SignUpPage extends React.Component {
     pwd1.value = '';
     pwd2.value = '';
   }
-
 
   render() {
     return(

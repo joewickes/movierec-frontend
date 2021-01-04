@@ -7,11 +7,16 @@ import reportWebVitals from './reportWebVitals';
 // Components
 import App from './components/App';
 
+// Context 
+import {ContextProvider} from './context/Context';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <ContextProvider>
+        <App />
+      </ContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

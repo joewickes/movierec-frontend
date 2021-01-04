@@ -19,7 +19,7 @@ class PostList extends React.Component {
       <section className="results">
         <NavLink to="/forms/add-rec"><button className="new-button">NEW REC</button></NavLink>
         <ul className="PostList">
-          {this.state.nums.map(num => <Post title={num} />)}
+          {this.state.nums.map(num => <Post key={num} title={num} />)}
         </ul>
       </section>
     );

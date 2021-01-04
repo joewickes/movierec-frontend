@@ -1,10 +1,9 @@
 // Dependencies
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
 
 // Local Dependencies
-import UsersService from './../services/users-service';
+import AuthService from './../services/auth-service';
 
 // Style
 import './../styles/LogInPage.css';
@@ -22,17 +21,20 @@ class LogInPage extends React.Component {
 
     const { username, pwd } = e.target;
 
-    UsersService.postLogin({
-      username: username.value,
-      password: bcrypt.hashSync(pwd.value, 12),
+    AuthService.authUser({
+      username: window.btoa(username.value),
+      password: window.btoa(pwd.value),
     })
-      .then(res => {
+      .then(token => {
+        console.log('login res', token);
         username.value = '';
         pwd.value = '';
-        // TokenService.saveAuthToken(res.authToken);
+        AuthService.saveAuthToken(token);
+        this.props.history.push('/');
       })
       .catch(res => {
-        this.setState({error: res.error})
+        console.log('catch', res.message);
+        this.setState({error: res.message})
       })
   }
   
@@ -40,9 +42,10 @@ class LogInPage extends React.Component {
     return(
       <main className="LogInPage">
         <h2>Log In</h2>
+        <p style={{color: "red"}}>{this.state.error}</p>
         <form className="log-in-form" onSubmit={(e) => this.handleLogInSubmit(e)}>
-          <input type="text" className="username" name="username" placeholder="Username" />
-          <input type="password" className="pwd1" name="pwd" placeholder="Password" />
+          <input type="text" className="username" name="username" placeholder="Username" required />
+          <input type="password" className="pwd1" name="pwd" placeholder="Password" required />
           <button className="log-in-btn" type="submit">LOG IN</button>
         </form>
       </main>

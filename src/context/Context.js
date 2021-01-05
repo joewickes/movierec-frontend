@@ -6,7 +6,6 @@ export class ContextProvider extends React.Component {
   
   state = {
     loggedIn: window.sessionStorage.getItem('movierec-auth-token'),
-    visited: window.localStorage.getItem('visited'),
   }
   
   render() {

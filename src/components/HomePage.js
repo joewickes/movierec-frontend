@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 // Components
 import SearchFilter from './SearchFilter';
 import PostList from './PostList';
+import Header from './Header';
 
 // Styles
 import './../styles/HomePage.css';
@@ -14,37 +15,27 @@ import Context from '../context/Context';
 class HomePage extends React.Component {
   
   state = {
-    loggedIn: false,
-    visited: false,
+    loggedIn: null,
   }
 
   componentDidMount() {
-    <Context.Consumer>
-      {value => {
-        this.setState({loggedIn: !!value.state.loggedIn});
-      }}
-    </Context.Consumer>
-  }
-
-  componentDidUpdate() {
-    <Context.Consumer>
-      {value => {
-        this.setState({loggedIn: !!value.state.loggedIn});
-      }}
-    </Context.Consumer>
+    if (!!window.sessionStorage.getItem('movierec-auth-token')) {
+      this.setState({loggedIn: true})
+    }
   }
 
   render() {
-
     return (
       <Context.Consumer>
         {value => {
 
-          console.log('CDM', value.state.loggedIn);
-
+          console.log('CDM', value.state.visited);
+          console.log(!!window.sessionStorage.getItem('movierec-auth-token'));
           return (
             <>
-              {value.state.loggedIn ? <Welcome /> : null}
+              <Header />
+              {!!window.sessionStorage.getItem('movierec-auth-token') === false ? <Welcome /> : null}
+              {console.log(!!window.sessionStorage.getItem('movierec-auth-token'))}
               <SearchFilter />
               <PostList />
             </>

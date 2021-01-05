@@ -2,6 +2,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+// Components
+import Header from './Header';
+
+// Styles
 import './../styles/NewRecPage.css';
 
 class NewRecPage extends React.Component {
@@ -198,10 +202,13 @@ class NewRecPage extends React.Component {
   
   render() {
     return (
-      <main className="NewRecPage">
-        <h2>Add a Recommendation</h2>
-        {this.chooseForm()}
-      </main>
+      <>
+        <Header></Header>
+        <main className="NewRecPage">
+          <h2>Add a Recommendation</h2>
+          {this.chooseForm()}
+        </main>
+      </>
     );
   }
 }

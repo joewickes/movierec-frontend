@@ -2,6 +2,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+// Components
+import Header from './Header';
+
 // Local Dependencies
 import AuthService from './../services/auth-service';
 
@@ -30,7 +33,7 @@ class LogInPage extends React.Component {
         username.value = '';
         pwd.value = '';
         AuthService.saveAuthToken(token);
-        return 'completed'
+        return 'completed';
       })
       .then(savedToken => {
         console.log(savedToken);
@@ -44,15 +47,18 @@ class LogInPage extends React.Component {
   
   render() {
     return(
-      <main className="LogInPage">
-        <h2>Log In</h2>
-        <p style={{color: "red"}}>{this.state.error}</p>
-        <form className="log-in-form" onSubmit={(e) => this.handleLogInSubmit(e)}>
-          <input type="text" className="username" name="username" placeholder="Username" required />
-          <input type="password" className="pwd1" name="pwd" placeholder="Password" required />
-          <button className="log-in-btn" type="submit">LOG IN</button>
-        </form>
-      </main>
+      <>
+        <Header />
+        <main className="LogInPage">
+          <h2>Log In</h2>
+          <p style={{color: "red"}}>{this.state.error}</p>
+          <form className="log-in-form" onSubmit={(e) => this.handleLogInSubmit(e)}>
+            <input type="text" className="username" name="username" placeholder="Username" required />
+            <input type="password" className="pwd1" name="pwd" placeholder="Password" required />
+            <button className="log-in-btn" type="submit">LOG IN</button>
+          </form>
+        </main>
+      </>
     );
   }
 }

@@ -2,6 +2,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+// Components
+import Header from './Header';
+
 // Local
 import usersService from './../services/users-service';
 
@@ -79,19 +82,22 @@ class SignUpPage extends React.Component {
 
   render() {
     return(
-      <main className="SignUpPage">
-        <h2>Sign Up</h2>
-        <p style={{color: "red"}}>{this.state.error}</p>
-        <form className="log-in-form" onSubmit={(e) => this.handleSignUpSubmit(e)} >
-          <div className="su-input-boxes">
-            <input type="text" className="username" name="username" placeholder={"Username"} required />
-            <input type="email" className="email" name="email" placeholder={"Email"} required />
-            <input type="password" className="pwd1" name="pwd1" placeholder="Password" required />
-            <input type="password" className="pwd2" name="pwd2" placeholder="Re-Enter Password" required />
-          </div>
-          <button className="sign-up-btn" type="submit">SIGN UP NOW</button>
-        </form>
-      </main>
+      <>
+        <Header />
+        <main className="SignUpPage">
+          <h2>Sign Up</h2>
+          <p style={{color: "red"}}>{this.state.error}</p>
+          <form className="log-in-form" onSubmit={(e) => this.handleSignUpSubmit(e)} >
+            <div className="su-input-boxes">
+              <input type="text" className="username" name="username" placeholder={"Username"} required />
+              <input type="email" className="email" name="email" placeholder={"Email"} required />
+              <input type="password" className="pwd1" name="pwd1" placeholder="Password" required />
+              <input type="password" className="pwd2" name="pwd2" placeholder="Re-Enter Password" required />
+            </div>
+            <button className="sign-up-btn" type="submit">SIGN UP NOW</button>
+          </form>
+        </main>
+      </>
     );
   }
 }

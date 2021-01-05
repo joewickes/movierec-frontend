@@ -11,12 +11,10 @@ import SignUpPage from './SignUpPage';
 import LogInPage from './LogInPage';
 import AccountPage from './AccountPage';
 import RecPage from './RecPage';
-import Header from './Header';
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <Switch>
         <HomePage exact path='/' component={() => <HomePage />} />
         <Route exact path='/forms/add-rec' component={() => <NewRecPage />} />

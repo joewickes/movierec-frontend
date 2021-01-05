@@ -18,21 +18,11 @@ class SignUpPage extends React.Component {
     blah: 'Hey',
   }
 
-  validatePasswords = (pwd1, pwd2) => { 
-    const r = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/;
+  validateMatchingPwd = (pwd1, pwd2) => {
     
-    if (pwd1.startsWith(' ') || pwd2.startsWith(' ') || pwd1.endsWith(' ') || pwd2.endsWith(' ')) {
-      return 'Passwords can\'t use spaces at the beginning or end';
-    } else if (pwd1.length < 8 || pwd2.length < 8) {
-      return 'Password must be more than 8 spaces';
-    } else if (pwd1 !== pwd2) {
+    if (pwd1 !== pwd2) {
       return 'Both passwords must be the same';
-    } else if (!r.test(pwd1)) {
-      return 'Password must contain a lowercase, uppercase, number, and a special character (!@#$%^&)'
-    } else {
-      this.setState({error: null});
-      return null;
-    }
+    } 
   }
 
   handleSignUpSubmit = (e) => {
@@ -41,12 +31,12 @@ class SignUpPage extends React.Component {
     // Target data
     const {username, email, pwd1, pwd2} = e.target;
 
-    const err = this.validatePasswords(pwd1.value, pwd2.value);
+    const err = this.validateMatchingPwd(pwd1.value, pwd2.value);
 
     if (err) {
-      this.setState({
+      return this.setState({
         error: err,
-      });
+      })
     }
 
     // New Data Object
@@ -58,19 +48,15 @@ class SignUpPage extends React.Component {
 
     usersService.postNewUser(newUser)
       .then(res => {
-        console.log('RES from SignUpPage', res);
         if (res && res.error) {
-          console.log('running res error', res)
           this.setState({error: res.error});
         } else {
-          console.log('running res push', res)
           this.props.history.push('/forms/log-in');
         }
         
       })
       .catch(error => {
         this.setState({error: error.message});
-        console.log('SignUpPageError', error);
       })
 
     // Return values to empty

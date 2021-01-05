@@ -4,7 +4,6 @@ import config from './../config';
 const authService = {
   // GIVE TO API
   authUser(userData) {
-    console.log('user data', userData);
 
     return fetch(`${config.API_ENDPOINT}/auth`, {
       method: 'POST',
@@ -18,13 +17,10 @@ const authService = {
           return res.json()
             .then(e => Promise.reject(e));
         } else {
-          console.log('RES.JSON DUDE', res.body);
           return res.json();
         }
       })
       .catch(error => {
-        console.log('Auth-Service Error', error);
-        console.log(typeof error);
         throw new Error('Can\'t log in right now.');
       })
     ;

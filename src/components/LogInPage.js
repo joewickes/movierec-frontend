@@ -29,18 +29,15 @@ class LogInPage extends React.Component {
       password: window.btoa(pwd.value),
     })
       .then(token => {
-        console.log('login res', token);
         username.value = '';
         pwd.value = '';
         AuthService.saveAuthToken(token);
         return 'completed';
       })
       .then(savedToken => {
-        console.log(savedToken);
         this.props.history.push('/');
       })
       .catch(res => {
-        console.log('catch', res.message);
         this.setState({error: res.message})
       })
   }

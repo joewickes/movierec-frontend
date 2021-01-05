@@ -28,14 +28,10 @@ class HomePage extends React.Component {
     return (
       <Context.Consumer>
         {value => {
-
-          console.log('CDM', value.state.visited);
-          console.log(!!window.sessionStorage.getItem('movierec-auth-token'));
           return (
             <>
               <Header />
               {!!window.sessionStorage.getItem('movierec-auth-token') === false ? <Welcome /> : null}
-              {console.log(!!window.sessionStorage.getItem('movierec-auth-token'))}
               <SearchFilter />
               <PostList />
             </>

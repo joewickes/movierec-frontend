@@ -4,10 +4,10 @@ import React from 'react';
 // Styles
 import './../styles/Welcome.css';
 
+// Context
+
 export default class Welcome extends React.Component {
   render() {
-
-    
 
     return (
       <section className="welcome">

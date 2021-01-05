@@ -30,6 +30,10 @@ class LogInPage extends React.Component {
         username.value = '';
         pwd.value = '';
         AuthService.saveAuthToken(token);
+        return 'completed'
+      })
+      .then(savedToken => {
+        console.log(savedToken);
         this.props.history.push('/');
       })
       .catch(res => {

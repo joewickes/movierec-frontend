@@ -30,7 +30,6 @@ class Header extends React.Component {
             </header>
           )
         }}
-        
       </Context.Consumer>
     );
   }

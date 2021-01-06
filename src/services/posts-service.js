@@ -9,18 +9,25 @@ const postsService = {
       })
   },
   searchPosts: (searchTitle) => {
+
+    const searchObj = {
+      where: 'homepage',
+      title: searchTitle,
+    }
+
     return fetch(`${config.API_ENDPOINT}/posts`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(searchTitle),
+      body: JSON.stringify(searchObj),
     })
       .then(res => {
         if (!res.ok) {
           return res.json()
             .then(e => Promise.reject(e));
         } else {
+          console.log('THIS is the res', res.json())
           return res.json();
         }
       })

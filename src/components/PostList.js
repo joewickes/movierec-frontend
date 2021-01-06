@@ -30,7 +30,8 @@ class PostList extends React.Component {
       <section className="results">
         {!!window.sessionStorage.getItem('movierec-auth-token') === false ? null : <NavLink to="/forms/add-rec"><button className="new-button">NEW REC</button></NavLink>}
         <ul className="PostList">
-          {this.state.posts.map(post => <Post key={post.id} title={post.title} />)}
+          {console.log(this.state.posts)}
+          {this.state.posts.map(post => <Post key={post.id} title={post.title} username={post.username} votes={post.votes} />)}
         </ul>
       </section>
     );

@@ -33,7 +33,7 @@ class HomePage extends React.Component {
               <Header />
               {!!window.sessionStorage.getItem('movierec-auth-token') === false ? <Welcome /> : null}
               <SearchFilter />
-              <PostList />
+              <PostList history={this.props.history} />
             </>
           );
         }}

@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 // Components
 import Post from './Post';
 
-// Services
-import PostsService from './../services/posts-service';
+// Context
+import Context from './../context/Context';
 
 //Styles
 import './../styles/PostList.css';
@@ -14,26 +14,25 @@ import './../styles/PostList.css';
 class PostList extends React.Component {
 
   state = {
-    posts: [],
     loggedIn: null,
-  }
-
-  componentDidMount() {
-    PostsService.getPosts()
-      .then(returnedPosts => {
-        this.setState({posts: returnedPosts})
-    })
   }
 
   render() {
     return (
-      <section className="results">
-        {!!window.sessionStorage.getItem('movierec-auth-token') === false ? null : <NavLink to="/forms/add-rec"><button className="new-button">NEW REC</button></NavLink>}
-        <ul className="PostList">
-          {console.log(this.state.posts)}
-          {this.state.posts.map(post => <Post key={post.id} title={post.title} username={post.username} votes={post.votes} />)}
-        </ul>
-      </section>
+
+      <Context.Consumer>
+        {value => {
+          return (
+            <section className="results">
+              {!!window.sessionStorage.getItem('movierec-auth-token') === false ? null : <NavLink to="/forms/add-rec"><button className="new-button">NEW REC</button></NavLink>}
+              <ul className="PostList">
+                {console.log(value.state.posts)}
+                {value.state.posts.map(post => <Post key={post.id} history={this.props.history} id={post.id} title={post.title} username={post.username} votes={post.votes} />)}
+              </ul>
+            </section>);
+        }}
+      
+      </Context.Consumer>
     );
   }
 }

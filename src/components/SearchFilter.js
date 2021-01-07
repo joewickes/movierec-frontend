@@ -24,18 +24,36 @@ class SearchFilter extends React.Component {
 
           const handleSearchSubmit = (e) => {
             e.preventDefault();
+            this.setState({error: null});
+            value.clearResults();
 
-            value.updateSearch(e.target.searchBar.value);
-            
-            PostsService.searchPosts(value.state.searchValue)
+            console.log('submitted value', e.target.searchBar.value);
+
+            PostsService.searchPosts(e.target.searchBar.value)
               .then(response => {
-                console.log('searchPost Result', response.json());
+                console.log('searchPost Result', response);
+                value.updatePosts(response)
               })
               .catch(res => {
                 this.setState({error: res.message});
               })
             ;
           }        
+
+          const handleFilterChange = (e) => {
+            e.preventDefault();
+
+            console.log(e.target.value);
+            PostsService.filterByGenre(e.target.value)
+              .then(response => {
+                console.log('filtered result', response);
+                value.updatePosts(response);
+              })
+              .catch(res => {
+                this.setState({error: res.message});
+              })
+            ;
+          }
 
           return (
             <>
@@ -48,7 +66,7 @@ class SearchFilter extends React.Component {
                   <input name="searchBar" className="search-bar" type="search" placeholder="Movie Title" />
                 </form>
                 <div className="genres-container">
-                  <select className="genres">
+                  <select className="genres" onChange={(e) => handleFilterChange(e)}>
                     <option value="">Genres</option>
                     <option value="Action">Action</option>
                     <option value="Comedy">Comedy</option>
@@ -62,7 +80,7 @@ class SearchFilter extends React.Component {
                   </select>
                 </div>
               </section>
-      </>
+            </>
           );
         }}
       

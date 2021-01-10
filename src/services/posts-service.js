@@ -3,14 +3,11 @@ import config from './../config';
 
 const postsService = {
   grabPosts: (where, userId, offset) => {
-    console.log('Getting Most Recent Posts');
     const postsObj = {
       where,
       userId,
       offset,
     }
-
-    console.log(postsObj)
 ;
     return fetch(`${config.API_ENDPOINT}/posts`, {
       method: 'POST',
@@ -33,7 +30,6 @@ const postsService = {
           } else {
             throw new Error('Can\'t grab any posts');
           }
-          // console.log('error', error);
         })
       ;
   },
@@ -65,7 +61,6 @@ const postsService = {
         } else {
           throw new Error('Can\'t find that title right now');
         }
-        // console.log('error', error);
       })
     ;
   },
@@ -96,7 +91,6 @@ const postsService = {
         } else {
           throw new Error('Can\'t look up that genre right now');
         }
-        // console.log('error', error);
       })
     ;
   },

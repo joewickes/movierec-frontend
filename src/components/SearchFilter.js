@@ -27,11 +27,8 @@ class SearchFilter extends React.Component {
             this.setState({error: null});
             value.clearResults();
 
-            console.log('submitted value', e.target.searchBar.value);
-
             PostsService.searchPosts(e.target.searchBar.value)
               .then(response => {
-                console.log('searchPost Result', response);
                 value.updatePosts(response)
               })
               .catch(res => {
@@ -43,10 +40,8 @@ class SearchFilter extends React.Component {
           const handleFilterChange = (e) => {
             e.preventDefault();
 
-            console.log(e.target.value);
             PostsService.filterByGenre(e.target.value)
               .then(response => {
-                console.log('filtered result', response);
                 value.updatePosts(response);
               })
               .catch(res => {

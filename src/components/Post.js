@@ -26,14 +26,6 @@ class Post extends React.Component {
 
           const handleVote = (e, plusOrMinus, id, username) => {
             e.preventDefault()
-
-            console.log(this.props.history)
-            
-            if (!window.sessionStorage.getItem('movierec-auth-token')) {
-              this.props.history.push('/forms/log-in');
-            }
-
-            console.log(e, plusOrMinus, id, username);
           }
 
           return (

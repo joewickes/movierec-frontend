@@ -39,13 +39,11 @@ class LogInPage extends React.Component {
               .then(token => {
                 username.value = '';
                 pwd.value = '';
-                console.log(token);
                 AuthService.saveAuthToken(token.createdToken);
                 window.sessionStorage.setItem('user_id', token.userId)
                 return 'completed';
               })
               .then(savedToken => {
-                console.log()
                 value.grabLoggedInPosts();
                 this.props.history.push('/');
               })

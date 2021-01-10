@@ -16,7 +16,6 @@ export class ContextProvider extends React.Component {
   }
 
   componentDidMount() {
-    console.log('userID', window.sessionStorage.getItem('user_id'));
     PostsService.grabPosts('homePageGet', window.sessionStorage.getItem('user_id'), 0)
       .then(returnedPosts => {
         this.setState({posts: returnedPosts})
@@ -31,13 +30,11 @@ export class ContextProvider extends React.Component {
   }
 
   updatePosts = (postsArray) => {
-    console.log('Updating post', postsArray);
     this.setState({posts: postsArray});
     return postsArray;
   }
 
   clearResults = () => {
-    console.log('clearing results');
     this.setState({posts: []});
   }
   

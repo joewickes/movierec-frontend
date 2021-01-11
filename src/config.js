@@ -1,5 +1,5 @@
 const config = {
-  API_ENDPOINT: 'https://warm-brushlands-92797.herokuapp.com/api',
+  API_ENDPOINT: 'https://warm-brushlands-92797.herokuapp.com',
   TOKEN_KEY: 'movierec-auth-token',
 }
 

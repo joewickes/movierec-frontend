@@ -25,6 +25,7 @@ export class ContextProvider extends React.Component {
   grabLoggedInPosts = () => {
     PostsService.grabPosts('homePageGet', window.sessionStorage.getItem('user_id'), 0)
       .then(returnedPosts => {
+        console.log('returned posts');
         this.setState({posts: returnedPosts})
     })
   }

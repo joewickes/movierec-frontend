@@ -22,11 +22,14 @@ class PostList extends React.Component {
 
       <Context.Consumer>
         {value => {
+
+          console.log(this.props.myvote)
+
           return (
             <section className="results">
               {!!window.sessionStorage.getItem('movierec-auth-token') === false ? null : <NavLink to="/forms/add-rec"><button className="new-button">NEW REC</button></NavLink>}
               <ul className="PostList">
-                {value.state.posts.map(post => <Post key={post.id} id={post.id} title={post.title} username={post.username} votes={post.votes} />)}
+                {!!value.state.posts ?  value.state.posts.map(post => <Post key={post.id} id={post.id} title={post.title} username={post.username} votes={post.votes} myVote={post.myvote} />) : <p>Can't display posts right now</p>}
               </ul>
             </section>);
         }}

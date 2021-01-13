@@ -31,19 +31,58 @@ export class ContextProvider extends React.Component {
     })
   }
 
-  updatePosts = (postsArray) => {
-    this.setState({posts: postsArray});
-    return postsArray;
-  }
-
   patchVote = (data) => {
     console.log('patching', data);
-    // VotesService.updateVote('update', JSON.stringify(data));
+    const a = this.state.posts.map(post => {
+      return post
+    })
+    console.log('a', a);
+    VotesService.getVoteId(data)
+      .then((res) => {
+        console.log('result from getting id', res);
+        VotesService.updateVote(res, data)
+          .then(() => {
+            const newPosts = this.state.posts.map(post => {
+              if (post.id === data.post_id) {
+                const parsedMyVote = parseInt(post.myvote);
+                const parsedValue = parseInt(data.value);
+
+                // If the original vote equals the current vote, votes returns to original
+
+
+
+                const toggledVote =  parsedValue === 0 ? parseInt(-(parsedMyVote)) : parsedValue;
+                const votes = !post.originalVotes ? (parseInt(post.votes) + toggledVote) : (parseInt(post.originalVotes) + toggledVote);
+                console.log('parsedMyVote', parsedMyVote, 'parsedValue', parsedValue, 'toggledVote', toggledVote, 'votes', votes)
+                const newPostObj = {
+                  date_created: data.date_created,
+                  id: post.id,
+                  myvote: data.value,
+                  title: post.title,
+                  username: post.user,
+                  votes: post.originalVotes && post.originalMyVote && (post.originalMyVote === data.value) ? post.originalVotes : votes,
+                  originalVotes: post.originalVotes ? post.originalVotes : post.votes,
+                  originalMyVote: post.originalMyVote ? post.originalMyVote : post.myvote,
+                }
+                return newPostObj;
+              } else return post;
+            })
+
+            console.log('newposts', newPosts);
+
+            this.setState({
+              posts: newPosts,
+            })
+          })
+      })
+    ;
   }
+
+  
 
   createVote = (data) => {
     console.log('creating', data);
-    // VotesService.addVote('add', JSON.stringify(data));
+    VotesService.addVote(JSON.stringify(data));
   }
 
   clearResults = () => {

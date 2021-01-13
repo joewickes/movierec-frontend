@@ -21,31 +21,42 @@ class Post extends React.Component {
 
     return (
       <Context.Consumer>
-        {value => {
+        {val => {
 
-          const handleVote = (e, num, post_id, user_id, v) => {
+          const handleVote = (e, value, post_id, userid, v) => {
             e.preventDefault();
 
             console.log('HANDLING IT');
             console.log('vote', v);
 
+            let date = new Date().toISOString();
+
             let data = {};
             if (typeof v === 'number') {
               data = {
-                'value': num,
+                value,
                 post_id,
-                user_id,
+                userid,
+                date_created: date,
               };
 
-              value.patchVote(data);
+              if (data.value === v) {
+                data.value = 0;
+              } else if (data.value !== v && v !== 0) {
+                data.value = -(v);
+              }
+
+              console.log('patch data with this info', data); // WORKING
+              val.patchVote(data);
             } else {
+              console.log('create vote');
               data = {
-                'value': num,
+                value,
                 post_id,
-                user_id,
+                userid,
               };
 
-              value.createVote(data);
+              val.createVote(data);
             }
             
           }

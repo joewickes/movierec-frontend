@@ -31,6 +31,12 @@ export class ContextProvider extends React.Component {
     })
   }
 
+  updatePosts = (postsArray) => {
+    console.log('Updating post', postsArray);
+    this.setState({posts: postsArray});
+    return postsArray;
+  }
+  
   patchVote = (data) => {
     console.log('patching', data);
     const a = this.state.posts.map(post => {
@@ -42,29 +48,37 @@ export class ContextProvider extends React.Component {
         console.log('result from getting id', res);
         VotesService.updateVote(res, data)
           .then(() => {
-            const newPosts = this.state.posts.map(post => {
+            const addedOriginals = this.state.posts.map(post => {
+              if (post.id === data.post_id && !post.originalVotes && !post.originalMyVote) {
+                const objWithOriginals = {
+                    date_created: post.date_created,
+                    id: post.id,
+                    myvote: parseInt(post.myvote),
+                    title: post.title,
+                    username: post.username,
+                    votes: parseInt(post.votes),
+                    originalVotesWithoutThisUser: parseInt(post.votes - post.myvote),
+                    originalVotes: parseInt(post.myvote),
+                  }
+                return objWithOriginals;
+              } else return post;
+            })
+
+            const newPosts = addedOriginals.map(post => {
               if (post.id === data.post_id) {
-                const parsedMyVote = parseInt(post.myvote);
-                const parsedValue = parseInt(data.value);
+                console.log('Here has added originals', post)
+                const votesTotal = parseInt(post.originalVotesWithoutThisUser) + parseInt(data.value);
 
-                // If the original vote equals the current vote, votes returns to original
-
-
-
-                const toggledVote =  parsedValue === 0 ? parseInt(-(parsedMyVote)) : parsedValue;
-                const votes = !post.originalVotes ? (parseInt(post.votes) + toggledVote) : (parseInt(post.originalVotes) + toggledVote);
-                console.log('parsedMyVote', parsedMyVote, 'parsedValue', parsedValue, 'toggledVote', toggledVote, 'votes', votes)
-                const newPostObj = {
-                  date_created: data.date_created,
+                return {
+                  date_created: post.date_created,
                   id: post.id,
                   myvote: data.value,
                   title: post.title,
-                  username: post.user,
-                  votes: post.originalVotes && post.originalMyVote && (post.originalMyVote === data.value) ? post.originalVotes : votes,
-                  originalVotes: post.originalVotes ? post.originalVotes : post.votes,
-                  originalMyVote: post.originalMyVote ? post.originalMyVote : post.myvote,
+                  username: post.username,
+                  votes: votesTotal,
+                  originalMyVote: post.originalMyVote,
+                  originalVotesWithoutThisUser: post.originalVotesWithoutThisUser,
                 }
-                return newPostObj;
               } else return post;
             })
 
@@ -77,8 +91,6 @@ export class ContextProvider extends React.Component {
       })
     ;
   }
-
-  
 
   createVote = (data) => {
     console.log('creating', data);

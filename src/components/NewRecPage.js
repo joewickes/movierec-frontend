@@ -8,6 +8,10 @@ import Header from './Header';
 // Styles
 import './../styles/NewRecPage.css';
 
+// Service Object
+import movieService from './../services/movie-service';
+import postsService from './../services/posts-service';
+
 class NewRecPage extends React.Component {
 
   state = {
@@ -15,11 +19,13 @@ class NewRecPage extends React.Component {
     promptNum: 0,
     search: '',
     matches: [],
-    selected: '',
+    selected: null,
     title: '',
     genre: '',
     yn: 'yn',
     user: 'user1',
+    error: null,
+    singleMovieInfo: null,
   }
 
   // SEARCH FOR EXISTING MOVIES FORM
@@ -65,23 +71,17 @@ class NewRecPage extends React.Component {
     })
   }
 
-  // Fetch movies matching the title keywords
-  getMatchingMovies = () => {
-    return fetch(`http://localhost:8000/api/movies?search=${this.state.search}`)
-      .then(res => {
-        return res.json();
-      })
-  }
-
-  // Fetch post matching movie (if 404, create new post)
 
   // Handle submitting the title form
   handleTitleSubmit = (e) => {
     e.preventDefault();
 
-    this.setState({loading: true});
+    this.setState({
+      loading: true,
+      error: null,
+    });
 
-    this.getMatchingMovies()
+    movieService.getMatchingMovies(this.state.search)
       .then((res) => {
         this.setState({
           matches: [...res],
@@ -95,15 +95,53 @@ class NewRecPage extends React.Component {
   handleNewMovieStart = (e) => {
     e.preventDefault();
 
-    this.setState({promptNum: 2})
+    this.setState({
+      promptNum: 2,
+      error: null
+    })
   }
 
   // Handle submitting the movie radio button form
   handleSelectSubmit = (e) => {
     e.preventDefault();
 
-    this.setState({loading: true});
-    console.log('Submit with movie already in the database');
+    this.setState({
+      loading: true,
+      error: null,
+    });
+    
+    postsService.getSinglePost(parseInt(this.state.selected))
+      .then(matchedPost => console.log('matchedPost', matchedPost))
+      .catch(error => {
+        if (error.message === 'No matching posts') {
+          movieService.getSingleMovie(this.state.selected)
+            .then(response => {
+              this.setState({
+                loading: false,
+                singleMovieInfo: response,
+                promptNum: 2,
+              })
+            })  
+          
+        } else {
+          this.setState({error: error.message})
+        }
+        
+      })
+  }
+
+  // Handle submission of new post
+  handleNewPostSubmit = (e) => {
+    e.preventDefault();
+
+    const val = e.target['recommend-yn'].value;
+    if (val === 'Yes') {
+      console.log('SUBMITTTTTTTTTTT');
+    } else {
+      console.log('Oh its like that is it???')
+    }
+    
+    this.props.history.push('/');
   }
 
   // Handle submitting a new movie form
@@ -133,19 +171,42 @@ class NewRecPage extends React.Component {
           return (
             <div key={match.id} className="radio-btn-container">
               <label htmlFor={match.id} className="radio-selects">
-              <input  type="radio" id={match.id} name="old-post-search" value={match.id} />
+              <input  type="radio" id={match.id} name="old-post-search" value={match.id} required/>
               {match.original_title}
               </label>
             </div>
           );
         })}
-        <button type="submit" className="movie-search-btn">SUBMIT</button>
+        {this.state.matches.length > 0 ? <button type="submit" className="movie-search-btn">SUBMIT</button>: null}
         <div>
           <p>Don't see the right movie?</p>
           <button onClick={this.handleNewMovieStart} className="movie-search-btn">ADD A MOVIE</button>
         </div>
       </form>
     ); 
+  }
+
+  // New post form
+  makeNewPostForm = () => {
+
+    const movieInfo = this.state.singleMovieInfo;
+    return (    
+      <>
+        {<h3 style={{color: '#fff203da'}}>{movieInfo.original_title} ({movieInfo.year})</h3>}
+        <form className="make-new-post-form" onSubmit={(e) => this.handleNewPostSubmit(e)}>
+          <p>Would you like to recommend this movie now?</p>
+                <label>
+                  <input className="recommend-yn" type="radio" name="recommend-yn" value="Yes" defaultChecked />
+                  Yes
+                </label>
+                <label>
+                  <input className="recommend-yn" type="radio" name="recommend-yn" value="No" />
+                  No
+                </label>
+                <button className="movie-search-btn" type="submit">SUBMIT</button>
+        </form>
+      </>
+    );
   }
 
   // New movie form
@@ -196,6 +257,8 @@ class NewRecPage extends React.Component {
     } else if (this.state.promptNum === 1) {
       return this.makePostSearchForm();
     } else if (this.state.promptNum === 2) {
+      return this.makeNewPostForm();
+    } else if (this.state.promptNum === 3) {
       return this.makeNewMovieForm();
     }
   }
@@ -206,6 +269,9 @@ class NewRecPage extends React.Component {
         <Header></Header>
         <main className="NewRecPage">
           <h2>Add a Recommendation</h2>
+          <div className="search-genre-error-container">
+            <p style={{color: "red"}}>{this.state.error}</p>
+          </div>
           {this.chooseForm()}
         </main>
       </>

@@ -96,9 +96,27 @@ const postsService = {
       })
     ;
   },
-  createVote: (postId, voteValue, UserId) => {
-
-  }
+  getSinglePost: (id) => {
+    console.log('sending this id', id);
+    return fetch(`${config.API_ENDPOINT}/posts/${id}`)
+      .then(res => {
+        if (!res.ok) {
+          return res.json()
+            .then(e => Promise.reject(e));
+        } else {
+          return res.json();
+        }
+      })
+      .catch(error => {
+        console.log('error in posts service', error)
+        if (error.message) {
+          throw new Error(error.message);
+        } else {
+          throw new Error('Can\'t look up that info right now');
+        }
+      })
+    ;
+  },
 }
 
 export default postsService;

@@ -14,6 +14,7 @@ export class ContextProvider extends React.Component {
     loggedIn: window.sessionStorage.getItem('movierec-auth-token'),
     posts: [],
     searchValue: null,
+    username: null,
   }
 
   componentDidMount() {
@@ -26,26 +27,18 @@ export class ContextProvider extends React.Component {
   grabLoggedInPosts = () => {
     PostsService.grabPosts('homePageGet', window.sessionStorage.getItem('user_id'), 0)
       .then(returnedPosts => {
-        console.log('returned posts');
         this.setState({posts: returnedPosts})
     })
   }
 
   updatePosts = (postsArray) => {
-    console.log('Updating post', postsArray);
     this.setState({posts: postsArray});
     return postsArray;
   }
   
   patchVote = (data) => {
-    console.log('patching', data);
-    const a = this.state.posts.map(post => {
-      return post
-    })
-    console.log('a', a);
     VotesService.getVoteId(data)
       .then((res) => {
-        console.log('result from getting id', res);
         VotesService.updateVote(res, data)
           .then(() => {
             const addedOriginals = this.state.posts.map(post => {
@@ -66,7 +59,6 @@ export class ContextProvider extends React.Component {
 
             const newPosts = addedOriginals.map(post => {
               if (post.id === data.post_id) {
-                console.log('Here has added originals', post)
                 const votesTotal = parseInt(post.originalVotesWithoutThisUser) + parseInt(data.value);
 
                 return {
@@ -82,8 +74,6 @@ export class ContextProvider extends React.Component {
               } else return post;
             })
 
-            console.log('newposts', newPosts);
-
             this.setState({
               posts: newPosts,
             })
@@ -93,12 +83,15 @@ export class ContextProvider extends React.Component {
   }
 
   createVote = (data) => {
-    console.log('creating', data);
     VotesService.addVote(JSON.stringify(data));
   }
 
   clearResults = () => {
     this.setState({posts: []});
+  }
+
+  setUsername = (username) => {
+    this.setState({username})
   }
   
   render() {
@@ -110,6 +103,7 @@ export class ContextProvider extends React.Component {
         grabLoggedInPosts: this.grabLoggedInPosts,
         patchVote: this.patchVote,
         createVote: this.createVote,
+        setUsername: this.setUsername,
       }}>
         {this.props.children}
       </Context.Provider>

@@ -26,9 +26,6 @@ class Post extends React.Component {
           const handleVote = (e, value, post_id, userid, v) => {
             e.preventDefault();
 
-            console.log('HANDLING IT');
-            console.log('vote', v);
-
             let date = new Date().toISOString();
 
             let data = {};
@@ -46,10 +43,8 @@ class Post extends React.Component {
                 data.value = -(v);
               }
 
-              console.log('patch data with this info', data); // WORKING
               val.patchVote(data);
             } else {
-              console.log('create vote');
               data = {
                 value,
                 post_id,
@@ -76,7 +71,6 @@ class Post extends React.Component {
                       parseInt(this.props.myVote) === 1 ? {borderColor: 'green', color: 'green'} : null
                     }>+</button>
                   }
-                  {console.log(this.props.myVote)}
                   <div style={parseInt(this.props.myVote) === 1 ? {color: "green"} : parseInt(this.props.myVote) === parseInt(-1) ? {color: "red"} : null}>{parseInt(this.props.votes)}</div>
                   {!window.sessionStorage.getItem('movierec-auth-token') ? null 
                     :  <button className="upvote-button" onClick={(e) => {

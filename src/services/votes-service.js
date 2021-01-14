@@ -6,8 +6,6 @@ const votesService = {
   // GIVE TO API
   addVote(voteData) {
 
-    console.log('nvd', voteData)
-
     return fetch(`${config.API_ENDPOINT}/votes`, {
       method: 'POST',
       headers: {
@@ -50,7 +48,6 @@ const votesService = {
     ;
   },
   updateVote(id, updatedVoteData) {
-    console.log('uvd',id, updatedVoteData);
 
     return fetch(`${config.API_ENDPOINT}/votes/${id}`, {
       method: 'PATCH',

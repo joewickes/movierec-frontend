@@ -17,7 +17,7 @@ class Header extends React.Component {
         {value => {
           return (
             <header>
-              <section className="header-left">
+              <section className="header-left" onClick={value.grabLoggedInPosts}>
                 <NavLink to="/"><p>MovieRec</p></NavLink>
               </section>
               <section className="header-right">

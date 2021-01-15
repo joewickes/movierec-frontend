@@ -23,6 +23,7 @@ class NewRecPage extends React.Component {
     search: '',
     matches: [],
     selected: null,
+    year: null,
     title: '',
     genre: '',
     yn: 'yn',
@@ -130,7 +131,7 @@ class NewRecPage extends React.Component {
             e.preventDefault();
 
             this.setState({
-              promptNum: 2,
+              promptNum: 3,
               error: null
             })
           }
@@ -169,7 +170,19 @@ class NewRecPage extends React.Component {
             e.preventDefault();
 
             this.setState({loading: true});
-            console.log('Submit new movie for people to enjoy!');
+            
+            const newMovieObj = {
+              original_title: this.state.title,
+              year: this.state.year,
+              genre: this.state.genre,
+            }
+            console.log(window.sessionStorage.getItem('user_id'));
+            movieService.addMovie(e.target['recommend-yn'].value, window.sessionStorage.getItem('user_id'), newMovieObj)
+              .then(() => {
+                this.props.history.push('/');
+                contextValue.grabLoggedInPosts();
+              })
+            ;
           }
 
           // FORMS

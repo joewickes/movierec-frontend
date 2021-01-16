@@ -6,12 +6,19 @@ const votesService = {
   // GIVE TO API
   addVote(voteData) {
 
+    const newVoteStuff = {
+      type: 'addNewVote',
+      voteData,
+    }
+
+    console.log(newVoteStuff);
+
     return fetch(`${config.API_ENDPOINT}/votes`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify({type: 'addNewVote', voteData}),
+      body: JSON.stringify(newVoteStuff),
     })
       .then(res => {
         if (!res.ok) {

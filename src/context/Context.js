@@ -83,7 +83,8 @@ export class ContextProvider extends React.Component {
   }
 
   createVote = (data) => {
-    VotesService.addVote(JSON.stringify(data));
+    VotesService.addVote(data)
+      .then('Added the thing');
   }
 
   clearResults = () => {

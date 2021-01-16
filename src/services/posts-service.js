@@ -5,9 +5,10 @@ const postsService = {
   grabPosts: (where, userId, offset) => {
     const postsObj = {
       where,
-      userId,
+      userId: parseInt(userId),
       offset,
     }
+    console.log('postsObj', postsObj)
 ;
     return fetch(`${config.API_ENDPOINT}/posts`, {
       method: 'POST',

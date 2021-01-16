@@ -41,6 +41,7 @@ const postsService = {
     const searchObj = {
       where: 'homePageSearch',
       title: searchTitle,
+      userId: parseInt(window.sessionStorage.getItem('user_id'))
     }
 
     return fetch(`${config.API_ENDPOINT}/posts`, {
@@ -71,6 +72,7 @@ const postsService = {
     const genreObj = {
       where: 'homePageFilter',
       genre: genre,
+      userId: parseInt(window.sessionStorage.getItem('user_id'))
     }
 
     return fetch(`${config.API_ENDPOINT}/posts`, {

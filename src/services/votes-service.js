@@ -25,7 +25,8 @@ const votesService = {
           return res.json()
             .then(e => Promise.reject(e));
         } else {
-          return res.json();
+          console.log('added a new vote sucessfully (in else of addvote)')
+          return;
         }
       })
       .catch(error => {

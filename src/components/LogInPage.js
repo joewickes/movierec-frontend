@@ -39,10 +39,14 @@ class LogInPage extends React.Component {
               password: window.btoa(pwd.value),
             })
               .then(token => {
+                res.json(token)
+                
+              })
+              .then(parsedToken => {
                 username.value = '';
                 pwd.value = '';
-                AuthService.saveAuthToken(token.createdToken);
-                window.sessionStorage.setItem('user_id', token.userId)
+                AuthService.saveAuthToken(parsed.createdToken);
+                window.sessionStorage.setItem('user_id', parsedToken.userId)
                 return 'completed';
               })
               .then(savedToken => {

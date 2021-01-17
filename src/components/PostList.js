@@ -23,6 +23,8 @@ class PostList extends React.Component {
       <Context.Consumer>
         {value => {
 
+          console.log(value.state.posts)
+
           return (
             <section className="results">
               {!!window.sessionStorage.getItem('movierec-auth-token') === false ? null : <NavLink to="/forms/add-rec"><button className="new-button">NEW REC</button></NavLink>}

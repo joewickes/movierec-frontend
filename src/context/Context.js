@@ -83,7 +83,46 @@ export class ContextProvider extends React.Component {
   }
 
   createVote = (data) => {
-    VotesService.addVote(JSON.stringify(data));
+    VotesService.addVote(data)
+      .then(() => {
+        const addedOriginals = this.state.posts.map(post => {
+          if (post.id === data.post_id && !post.originalVotes && !post.originalMyVote) {
+            const objWithOriginals = {
+                date_created: post.date_created,
+                id: post.id,
+                myvote: parseInt(post.myvote),
+                title: post.title,
+                username: post.username,
+                votes: parseInt(post.votes),
+                originalVotesWithoutThisUser: parseInt(post.votes - post.myvote),
+                originalVotes: parseInt(post.myvote),
+              }
+            return objWithOriginals;
+          } else return post;
+        })
+
+        const newPosts = addedOriginals.map(post => {
+          if (post.id === data.post_id) {
+            const votesTotal = parseInt(post.originalVotesWithoutThisUser) + parseInt(data.value);
+
+            return {
+              date_created: post.date_created,
+              id: post.id,
+              myvote: data.value,
+              title: post.title,
+              username: post.username,
+              votes: votesTotal,
+              originalMyVote: post.originalMyVote,
+              originalVotesWithoutThisUser: post.originalVotesWithoutThisUser,
+            }
+          } else return post;
+        })
+
+        this.setState({
+          posts: newPosts,
+        })
+      })
+    ;
   }
 
   clearResults = () => {

@@ -32,7 +32,7 @@ class LogInPage extends React.Component {
 
             const { username, pwd } = e.target;
 
-            window.sessionStorage.setItem('username', username)
+            console.log(username, pwd);
 
             AuthService.authUser({
               username: window.btoa(username.value),

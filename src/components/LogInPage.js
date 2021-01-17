@@ -32,7 +32,7 @@ class LogInPage extends React.Component {
 
             const { username, pwd } = e.target;
 
-            console.log(username, pwd);
+            console.log(e.target);
 
             AuthService.authUser({
               username: window.btoa(username.value),

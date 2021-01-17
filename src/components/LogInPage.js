@@ -39,8 +39,7 @@ class LogInPage extends React.Component {
               password: window.btoa(pwd.value),
             })
               .then(token => {
-                res.json(token)
-                
+                return token.json();
               })
               .then(parsedToken => {
                 username.value = '';

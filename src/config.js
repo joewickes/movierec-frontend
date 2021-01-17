@@ -1,6 +1,6 @@
 const config = {
-  API_ENDPOINT: 'http://localhost:8000/api',
-  TOKEN_KEY: 'movierec-auth-token',
+  API_ENDPOINT: 'https://peaceful-plateau-85274.herokuapp.com/api',
+  API_KEY: process.env.REACT_APP_API_KEY,
 }
 
 export default config;

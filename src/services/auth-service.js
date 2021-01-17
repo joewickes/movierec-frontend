@@ -5,6 +5,8 @@ const authService = {
   // GIVE TO API
   authUser(userData) {
 
+    console.log('ud', JSON.stringify(userData))
+
     return fetch(`${config.API_ENDPOINT}/auth`, {
       method: 'POST',
       headers: {

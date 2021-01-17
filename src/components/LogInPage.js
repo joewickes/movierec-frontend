@@ -28,23 +28,17 @@ class LogInPage extends React.Component {
           const handleLogInSubmit = (e) => {
             e.preventDefault();
 
-            this.setState({error: null});
+            this.setState({error: null})
 
-            const { username, pwd } = e.target;
-
-            console.log(e.target);
+            console.log(e.target.username.value, e.target.pwd.value);
 
             AuthService.authUser({
-              username: window.btoa(username.value),
-              password: window.btoa(pwd.value),
+              username: window.btoa(e.target.username.value),
+              password: window.btoa(e.target.pwd.value),
             })
-              .then(token => {
-                console.log('got back from auth service')
-                return token.json();
-              })
               .then(parsedToken => {
-                username.value = '';
-                pwd.value = '';
+                e.target.username.value = '';
+                e.target.pwd.value = '';
                 AuthService.saveAuthToken(parsedToken.createdToken);
                 window.sessionStorage.setItem('user_id', parsedToken.userId)
                 return 'completed';

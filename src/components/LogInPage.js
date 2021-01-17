@@ -39,6 +39,7 @@ class LogInPage extends React.Component {
               password: window.btoa(pwd.value),
             })
               .then(token => {
+                console.log('got back from auth service')
                 return token.json();
               })
               .then(parsedToken => {

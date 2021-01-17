@@ -44,7 +44,7 @@ class LogInPage extends React.Component {
               .then(parsedToken => {
                 username.value = '';
                 pwd.value = '';
-                AuthService.saveAuthToken(parsed.createdToken);
+                AuthService.saveAuthToken(parsedToken.createdToken);
                 window.sessionStorage.setItem('user_id', parsedToken.userId)
                 return 'completed';
               })

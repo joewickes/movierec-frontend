@@ -28,7 +28,7 @@ const authService = {
     ;
   },
   saveAuthToken(token) {
-    window.sessionStorage.setItem(config.TOKEN_KEY, token);
+    window.sessionStorage.setItem('movierec-auth-token', token);
   },
   getAuthToken() {
     return window.sessionStorage.getItem(config.TOKEN_KEY);

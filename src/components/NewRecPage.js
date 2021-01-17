@@ -138,6 +138,7 @@ class NewRecPage extends React.Component {
 
           // Handle submitting the movie radio button form
           const handleSelectSubmit = (e) => {
+            console.log('handling select submit!')
             e.preventDefault();
 
             this.setState({
@@ -146,7 +147,14 @@ class NewRecPage extends React.Component {
             });
             
             postsService.getSinglePost(parseInt(this.state.selected))
-              .then(matchedPost => console.log('matchedPost', matchedPost))
+              .then(matchedPost => {
+                console.log('matching post', matchedPost);
+                this.setState({
+                  error: null,
+                  loading: false,
+                  promptNum: 4,
+                })
+              })
               .catch(error => {
                 if (error.message === 'No matching posts') {
                   movieService.getSingleMovie(this.state.selected)
@@ -275,6 +283,19 @@ class NewRecPage extends React.Component {
               </form>);
           }
 
+          const makeRedirectScreen = () => {
+            return (
+              <>
+                <p>Looks like that movie has already been suggested!</p>
+                <br />
+                <br />
+                <p>If you would like to upvote it, search for it on the home page and click the "+" button!</p>
+                <br />
+                <p><i>(You can get back to the home page by clicking the "MovieRec" logo on the top left)</i></p>
+              </>
+            );
+          }
+
           // Handle loading
           const makeLoadingScreen = () => {
             return (
@@ -293,6 +314,8 @@ class NewRecPage extends React.Component {
               return makeNewPostForm();
             } else if (this.state.promptNum === 3) {
               return makeNewMovieForm();
+            } else if (this.state.promptNum === 4) {
+              return makeRedirectScreen();
             }
           }
                 

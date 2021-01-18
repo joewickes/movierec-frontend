@@ -16,7 +16,6 @@ const movieService = {
       })
   },
   addMovie: (yn, user_id, newMovieObj) => {
-    console.log(JSON.stringify({yn, user_id, newMovieObj}))
     return fetch(`${config.API_ENDPOINT}/movies`, {
       method: 'POST',
       headers: {
@@ -34,10 +33,8 @@ const movieService = {
         })
         .catch(error => {
           if (error.error) {
-            console.log(error);
             throw new Error(error.error);
           } else {
-            console.log(error);
             throw new Error('Can\'t create a movie right now');
           }
         })

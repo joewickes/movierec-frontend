@@ -8,7 +8,6 @@ const postsService = {
       userId: parseInt(userId),
       offset,
     }
-    console.log('postsObj', postsObj)
 ;
     return fetch(`${config.API_ENDPOINT}/posts`, {
       method: 'POST',
@@ -27,10 +26,8 @@ const postsService = {
         })
         .catch(error => {
           if (error.error) {
-            console.log(error);
             throw new Error(error.error);
           } else {
-            console.log(error);
             throw new Error('Can\'t grab any posts');
           }
         })
@@ -100,7 +97,6 @@ const postsService = {
     ;
   },
   getSinglePost: (id) => {
-    console.log('sending this id', id);
     return fetch(`${config.API_ENDPOINT}/posts/${id}`)
       .then(res => {
         if (!res.ok) {
@@ -111,7 +107,6 @@ const postsService = {
         }
       })
       .catch(error => {
-        console.log('error in posts service', error)
         if (error.message) {
           throw new Error(error.message);
         } else {
@@ -137,7 +132,6 @@ const postsService = {
         }
       })
       .catch(error => {
-        console.log(error);
         if (error.error) {
           throw new Error(error.error);
         } else {

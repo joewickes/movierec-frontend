@@ -116,7 +116,6 @@ class NewRecPage extends React.Component {
               
               postsService.insertPost(newPostData)
                 .then(() => {
-                  console.log('made it back from inserting the post');
                   this.props.history.push('/');
                   contextValue.grabLoggedInPosts();
                 })
@@ -138,7 +137,6 @@ class NewRecPage extends React.Component {
 
           // Handle submitting the movie radio button form
           const handleSelectSubmit = (e) => {
-            console.log('handling select submit!')
             e.preventDefault();
 
             this.setState({
@@ -148,7 +146,6 @@ class NewRecPage extends React.Component {
             
             postsService.getSinglePost(parseInt(this.state.selected))
               .then(matchedPost => {
-                console.log('matching post', matchedPost);
                 this.setState({
                   error: null,
                   loading: false,
@@ -184,7 +181,6 @@ class NewRecPage extends React.Component {
               year: this.state.year,
               genre: this.state.genre,
             }
-            console.log(window.sessionStorage.getItem('user_id'));
             movieService.addMovie(e.target['recommend-yn'].value, window.sessionStorage.getItem('user_id'), newMovieObj)
               .then(() => {
                 this.props.history.push('/');

@@ -30,8 +30,6 @@ class LogInPage extends React.Component {
 
             this.setState({error: null})
 
-            console.log(e.target.username.value, e.target.pwd.value);
-
             AuthService.authUser({
               username: window.btoa(e.target.username.value),
               password: window.btoa(e.target.pwd.value),

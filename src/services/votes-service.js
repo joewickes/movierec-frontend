@@ -11,8 +11,6 @@ const votesService = {
       voteData,
     }
 
-    console.log(newVoteStuff);
-
     return fetch(`${config.API_ENDPOINT}/votes`, {
       method: 'POST',
       headers: {
@@ -25,7 +23,6 @@ const votesService = {
           return res.json()
             .then(e => Promise.reject(e));
         } else {
-          console.log('added a new vote sucessfully (in else of addvote)')
           return;
         }
       })

@@ -29,7 +29,6 @@ class SearchFilter extends React.Component {
 
             PostsService.searchPosts(e.target.searchBar.value)
               .then(response => {
-                console.log('search posts response', response)
                 value.updatePosts(response)
               })
               .catch(res => {

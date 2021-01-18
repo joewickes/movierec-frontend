@@ -9,13 +9,13 @@ import Context from './../context/Context';
 
 class Post extends React.Component {
 
-  static defaultProps =  {
-    
-  }
-
-  state = {
-    owned: false,
-  }
+static defaultProps = {
+  id: 0,
+  title: null,
+  username: null,
+  votes: 0,
+  myVote: null,
+}
 
   render() {
 
@@ -26,13 +26,12 @@ class Post extends React.Component {
           const handleVote = (e, value, post_id, userid, v) => {
             e.preventDefault();
 
-            console.log(v);
+            
 
             let date = new Date().toISOString();
 
             let data = {};
             if (typeof v === 'number') {
-              console.log('looks like this has been voted on before')
               data = {
                 value,
                 post_id,
@@ -41,23 +40,18 @@ class Post extends React.Component {
               };
 
               if (data.value === v) {
-                console.log('same vote as before');
                 data.value = 0;
               } else if (data.value !== v && v !== 0) {
-                console.log('different vote, so not zero')
                 data.value = -(v);
               }
 
               val.patchVote(data);
             } else {
-              console.log('No vote so lets create one')
               data = {
                 value,
                 post_id,
                 userid,
               };
-
-              console.log('values of new vote', data)
 
               val.createVote(data);
             }

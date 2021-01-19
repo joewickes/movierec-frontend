@@ -39,13 +39,19 @@
 
 /* Make radio buttons disappear and click with hover */
 
-input[type="radio"] {
-  
-}
 
 .radio-btn-container {
   height: 50px;
   display: flex;
+}
+
+.radio-btn {
+  display: none;
+}
+
+.selected-radio-btn {
+  background-color: #fff203da !important;
+  color: #1a1a1a !important;
 }
 
 .radio-selects {
@@ -56,14 +62,9 @@ input[type="radio"] {
 }
 
 .radio-selects:hover {
-  background-color: #fff203da;
-  color: #1a1a1a;
+    background-color: #fff203da;
+    color: #1a1a1a;
 }
-
-.radio-selects:checked {
-  background-color: #fff203da;
-}
-
 
 /* INPUTS */
 
@@ -72,4 +73,81 @@ input[type="radio"] {
   border: 1px solid #aaa;
   padding: 8px;
   margin-top: 20px;
+}
+
+.submit-and-new-movie-buttons-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-new-movie-button-container {
+  margin-top: 30px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-new-movie-button-container div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* NEW POST SECTION */
+
+.make-new-post-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.make-new-post-form p, .make-new-post-form div {
+  margin-top: 25px;
+}
+
+.make-new-post-form div {
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.submit-rec-button {
+  padding-top: 10px;
+}
+
+/* NEW MOVIE FORM */
+
+.make-new-movie-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-container {
+  width: 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  width: 100%
+}
+
+.year {
+  width: 125px;
+  margin-top: 15px;
+}
+
+.year-and-genres-container {
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-genre-select {
+  margin-top: 15px;
 }

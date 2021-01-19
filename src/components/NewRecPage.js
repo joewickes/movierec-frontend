@@ -30,6 +30,8 @@ class NewRecPage extends React.Component {
     user: 'user1',
     error: null,
     singleMovieInfo: null,
+    selectToColor: null,
+    searchedInGeneral: false,
   }
 
   
@@ -45,13 +47,15 @@ class NewRecPage extends React.Component {
             })
           }
 
-
           // SELECT EXISTING MOVIE OR ADD ONE TO RECOMMEND
 
           // Update radio button in state selection as it's selected
-          const updateSelect = (e) => {
+          const updateSelect = (e, value) => {
+            e.preventDefault();
+
+
             this.setState({
-              selected: e.target.value,
+              selected: value,
             })
           }
 
@@ -87,16 +91,31 @@ class NewRecPage extends React.Component {
             this.setState({
               loading: true,
               error: null,
+              searchedInGeneral: true,
             });
 
             movieService.getMatchingMovies(this.state.search)
               .then((res) => {
-                this.setState({
-                  matches: [...res],
-                  loading: false,
-                  promptNum: 1,
-                })
+
+                if (res.length === 0) {
+                  this.setState({
+                    matches: [...res],
+                    loading: false,
+                    promptNum: 1,
+                    searchedInGeneral: true,
+                    error: 'Looks like we don\'t have this movie in our database yet.'
+                  })
+                } else if (res.length > 0) {
+                  this.setState({
+                    matches: [...res],
+                    loading: false,
+                    promptNum: 1,
+                    searchedInGeneral: false
+                  });
+                }
+                
               })
+            ;
           }
 
           // Handle submission of new post
@@ -139,10 +158,15 @@ class NewRecPage extends React.Component {
           const handleSelectSubmit = (e) => {
             e.preventDefault();
 
-            this.setState({
-              loading: true,
-              error: null,
-            });
+            if (this.state.selected) {
+              this.setState({
+                loading: true,
+                error: null,
+              });
+            } else if (!this.state.selected) {
+              this.setState({error: "Make sure to select something before you submit it!"})
+              return;
+            }
             
             postsService.getSinglePost(parseInt(this.state.selected))
               .then(matchedPost => {
@@ -189,6 +213,13 @@ class NewRecPage extends React.Component {
             ;
           }
 
+          // STYLE
+          const updateColoringIfSelected = (e, value) => {
+            e.preventDefault();
+            this.setState({selectToColor: value})
+            updateSelect(e, value);
+          }
+
           // FORMS
           // Starting Form (Search by movie titles)
           const makeTitleSearchForm = () => {
@@ -203,21 +234,27 @@ class NewRecPage extends React.Component {
           // Second Form (Select existing movie titles to ref against movies already recommended)
           const makePostSearchForm = () => {
             return (
-              <form className="old-post-search-form" onChange={updateSelect} onSubmit={handleSelectSubmit}>
+              <form className="old-post-search-form" onSubmit={handleSelectSubmit}>
                 {this.state.matches.map(match => {
                   return (
                     <div key={match.id} className="radio-btn-container">
-                      <label htmlFor={match.id} className="radio-selects">
-                      <input  type="radio" id={match.id} name="old-post-search" value={match.id} required/>
-                      {match.original_title}
+                      <label htmlFor={match.id} id={match.id} name="old-post-search" className={this.state.selectToColor === match.id ? "selected-radio-btn radio-selects" : "radio-selects"} onClick={(e) => updateColoringIfSelected(e, match.id)} required>
+                        <input className="radio-btn" type="radio" id={match.id} name="old-post-search" value={match.id}/>
+                        {match.original_title}
                       </label>
                     </div>
                   );
                 })}
+                <div className="submit-and-new-movie-buttons-container">
                 {this.state.matches.length > 0 ? <button type="submit" className="movie-search-btn">SUBMIT</button>: null}
-                <div>
-                  <p>Don't see the right movie?</p>
-                  <button onClick={handleNewMovieStart} className="movie-search-btn">ADD A MOVIE</button>
+                <div className="start-new-movie-button-container">
+                  <div>
+                    <p>Don't see the right movie?</p>
+                  </div>
+                  <div>
+                    <button onClick={handleNewMovieStart} className="movie-search-btn">ADD A MOVIE</button>
+                  </div>
+                </div>
                 </div>
               </form>
             ); 
@@ -232,15 +269,19 @@ class NewRecPage extends React.Component {
                 {<h3 style={{color: '#fff203da'}}>{movieInfo.original_title} ({movieInfo.year})</h3>}
                 <form className="make-new-post-form" onSubmit={(e) => handleNewPostSubmit(e)}>
                   <p>Would you like to recommend this movie now?</p>
-                        <label>
-                          <input className="recommend-yn" type="radio" name="recommend-yn" value="Yes" defaultChecked />
-                          Yes
-                        </label>
-                        <label>
-                          <input className="recommend-yn" type="radio" name="recommend-yn" value="No" />
-                          No
-                        </label>
-                        <button className="movie-search-btn" type="submit">SUBMIT</button>
+                  <div>
+                    <label>
+                      <input className="recommend-yn" type="radio" name="recommend-yn" value="Yes" defaultChecked />
+                      Yes
+                    </label>
+                    <label>
+                      <input className="recommend-yn" type="radio" name="recommend-yn" value="No" />
+                      No
+                    </label>
+                  </div>
+                  <div>
+                    <button className="movie-search-btn submit-rec-btn" type="submit">SUBMIT</button>
+                  </div>
                 </form>
               </>
             );
@@ -250,30 +291,37 @@ class NewRecPage extends React.Component {
           const makeNewMovieForm = () => {
             return (
               <form className="make-new-movie-form" onSubmit={handleNewMovieSubmit}>
-                <input className="make-new-movie-title" type="text" placeholder="e.g., A Movie Title" onChange={updateTitle} required />
-                <input className="make-new-movie-year" type="number" placeholder="e.g., 2001" onChange={updateYear} required /> {/*first movie came out in 1888} */}
-                <select className="make-new-movie-genre" required onChange={updateGenre}>
-                  <option value="">Genres</option>
-                  <option value="Action">Action</option>
-                  <option value="Comedy">Comedy</option>
-                  <option value="Drama">Drama</option>
-                  <option value="Fantasy">Fantasy</option>
-                  <option value="Horror">Horror</option>
-                  <option value="Mystery">Mystery</option>
-                  <option value="Romance">Romance</option>
-                  <option value="Thriller">Thriller</option>
-                  <option value="Western">Western</option>
-                </select>
-                <div>
+                <div className="movie-form-top-inputs-container"></div>
+                <div className="title-container">
+                  <input className="make-new-movie-title search-bar title" type="text" placeholder="Title (e.g., A Movie Title)" onChange={updateTitle} required />
+                </div>
+                <div className="year-and-genres-container">
+                  <input className="make-new-movie-year search-bar year" type="number" placeholder="Year (e.g., 2001)" onChange={updateYear} required /> {/*first movie came out in 1888} */}
+                  <select className="make-new-movie-genre genres movie-genre-select" required onChange={updateGenre}>
+                    <option value="">Genres</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Western">Western</option>
+                  </select>
+                </div>
+                <div className="make-new-post-form">
                   <p>Would you like to recommend this movie now?</p>
-                  <label>
-                    <input className="recommend-yn" type="radio" name="recommend-yn" value="Yes" defaultChecked />
-                    Yes
-                  </label>
-                  <label>
-                    <input className="recommend-yn" type="radio" name="recommend-yn" value="No" />
-                    No
-                  </label>
+                  <div>
+                    <label>
+                      <input className="recommend-yn" type="radio" name="recommend-yn" value="Yes" defaultChecked />
+                      Yes
+                    </label>
+                    <label>
+                      <input className="recommend-yn" type="radio" name="recommend-yn" value="No" />
+                      No
+                    </label>
+                  </div>
                 </div>
                 <button className="movie-search-btn" type="submit">SUBMIT</button>
               </form>);

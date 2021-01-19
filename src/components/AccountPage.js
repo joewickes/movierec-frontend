@@ -6,6 +6,9 @@ import Context from '../context/Context';
 // Components
 import Header from './Header';
 
+// Style
+import './../styles/AccountPage.css';
+
 class AccountPage extends React.Component {
   
   
@@ -25,8 +28,10 @@ class AccountPage extends React.Component {
           return (
             <>
               <Header />
-              <h2>Account Page</h2>
-              <button onClick={destroyCreds}>LOG OUT</button>
+              <main className="AccountPage">
+                <h2>Your Account</h2>
+                <button className="movie-search-btn" onClick={destroyCreds}>LOG OUT</button>
+              </main>
             </>
           );
         }}

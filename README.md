@@ -166,6 +166,7 @@ That's it! You now know how to use MovieRec from beginning to end!
 ## Technologies Used
 - Bcrypt JS
 - React
+- React Context
 - React DOM
 - React Router DOM
 - Bootstrapped with create-react-app

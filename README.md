@@ -26,7 +26,7 @@ As a user you can:
 ## How To Use It
 We are going to create a demo user to walk through a traditional use of the app
 
-(./src/images/SS1.png?raw=true "Title")
+![Home Page](./src/images/SS1.png?raw=true "Title")
 
 Everyone starts out on the home page displaying: 
 - A MovieRec logo in the top left (that will always return you to this page when clicked)

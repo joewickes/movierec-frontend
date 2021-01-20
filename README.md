@@ -5,7 +5,7 @@
 ## Table of Contents
 - [Summary](##-summary)
 - [How To Use It](##-how-to-use-it)
-- [Technologies Used] (##-technologies-used)
+- [Technologies Used](##-technologies-used)
 
 ## Summary
 

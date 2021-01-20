@@ -5,12 +5,12 @@
 ## Table of Contents
 - [Summary](##-summary)
 - [How To Use It](##-how-to-use-it)
-- [Technologies] (##-technologies-used)
+- [Technologies Used] (##-technologies-used)
 
 ## Summary
 
 ## How To Use It
 
-## Technologies-Used
+## Technologies Used
 - Bootstrapped with create-react-app
 

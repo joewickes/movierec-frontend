@@ -164,5 +164,10 @@ USER - user goes to the account page, enters the log out page, and clicks 'Log O
 That's it! You now know how to use MovieRec from beginning to end!
 
 ## Technologies Used
+- Bcrypt JS
+- React
+- React DOM
+- React Router DOM
 - Bootstrapped with create-react-app
+- Deployed using Vercel
 

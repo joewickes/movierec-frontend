@@ -3,9 +3,9 @@
 ## Live Link: https://movierec-frontend.vercel.app/
 
 ## Table of Contents
-- [Summary](## summary)
-- [How To Use It](## how-to-use-it)
-- [Technologies] (## technologies-used)
+- [Summary](##-summary)
+- [How To Use It](##-how-to-use-it)
+- [Technologies] (##-technologies-used)
 
 ## Summary
 

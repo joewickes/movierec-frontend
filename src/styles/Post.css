@@ -7,6 +7,10 @@
   color: #aaa;
 }
 
+.Post h3 {
+  color: #fff203da;
+}
+
 .post-top {
   color: #fff203da;
 }
@@ -15,6 +19,7 @@
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .uv-dv-buttons {

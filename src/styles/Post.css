@@ -19,6 +19,9 @@
 
 .uv-dv-buttons {
   width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .uv-dv-buttons button {

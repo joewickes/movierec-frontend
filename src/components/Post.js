@@ -1,5 +1,7 @@
 // Dependencies
 import React from 'react';
+import { AiFillCaretDown } from "react-icons/ai";
+import { AiFillCaretUp } from "react-icons/ai";
 
 // Styles
 import './../styles/Post.css';
@@ -67,19 +69,19 @@ static defaultProps = {
                 <p>{this.props.username}</p>
                 <div className="uv-dv-buttons">
                   {!window.sessionStorage.getItem('movierec-auth-token') ? null 
-                    : <button className="upvote-button" onClick={(e) => {
+                    : <AiFillCaretUp className="upvote-button" onClick={(e) => {
                       return handleVote(e, 1, this.props.id, parseInt(window.sessionStorage.getItem('user_id')), this.props.myVote)
                     }} style={
-                      parseInt(this.props.myVote) === 1 ? {borderColor: 'green', color: 'green'} : null
-                    }>+</button>
+                      parseInt(this.props.myVote) === 1 ? {fill: 'green'} : null
+                    } />
                   }
-                  <div style={parseInt(this.props.myVote) === 1 ? {color: "green"} : parseInt(this.props.myVote) === parseInt(-1) ? {color: "red"} : null}>{parseInt(this.props.votes)}</div>
+                  <div style={parseInt(this.props.myVote) === 1 ? {color: "green"} : parseInt(this.props.myVote) === parseInt(-1) ? {color: "red"} : {color: "#fff203da"}}>{parseInt(this.props.votes)}</div>
                   {!window.sessionStorage.getItem('movierec-auth-token') ? null 
-                    :  <button className="upvote-button" onClick={(e) => {
+                    :  <AiFillCaretDown className="upvote-button" onClick={(e) => {
                       return handleVote(e, -1, this.props.id, parseInt(window.sessionStorage.getItem('user_id')), this.props.myVote)
                     }} style={
-                      parseInt(this.props.myVote) === parseInt(-1) ? {borderColor: 'red', color: 'red'} : null
-                    }>-</button>  
+                      parseInt(this.props.myVote) === parseInt(-1) ? {fill: 'red'} : null
+                    } />
                   }              
                 </div>
               </section>

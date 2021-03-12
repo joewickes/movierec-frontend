@@ -7,6 +7,10 @@
   color: #aaa;
 }
 
+.Post:hover {
+  border-color: #fff203da;
+}
+
 .Post h3 {
   color: #fff203da;
 }

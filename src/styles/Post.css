@@ -38,3 +38,10 @@
   color: #fff203da;
 }
 
+.upvote-button:hover {
+  fill: #fff203da;
+}
+
+.downvote-button:hover {
+
+}

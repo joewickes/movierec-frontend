@@ -26,6 +26,10 @@
   justify-self: flex-end;
 }
 
+.search-bar:hover {
+  border-color: #fff203da;
+}
+
 .genres-container {
   flex: 1;
   display: flex;
@@ -39,4 +43,9 @@
   color: #aaa;
   padding: 7px;
   cursor: pointer;
+}
+
+.genres:hover {
+  color: #fff203da;
+  border-color: #fff203da;
 }

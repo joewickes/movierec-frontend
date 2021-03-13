@@ -11,11 +11,18 @@
 }
 
 .new-button {
-  background-color: #fff203da;
-  color: #1a1a1a;
+  background-color: transparent;
+  color: #fff203da;
   border: 1px solid #fff203da;
   padding: 10px 40px;
   margin-top: 25px;
   cursor: pointer;
+}
+
+.new-button:hover {
+  background-color: #fff203da;
+  color: #1a1a1a;
+  border: 1px solid #fff203da;
+  transition: all .1s;
 }
 

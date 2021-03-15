@@ -25,7 +25,7 @@ const postsService = {
           }
         })
         .catch(error => {
-          console.log(error)
+          console.log(error.error.message)
           if (error) {
             throw new Error(error.error.message);
           } else {

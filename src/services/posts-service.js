@@ -25,8 +25,9 @@ const postsService = {
           }
         })
         .catch(error => {
-          if (error.error) {
-            throw new Error(error.error);
+          console.log(error)
+          if (error) {
+            throw new Error(error.error.message);
           } else {
             throw new Error('Can\'t grab any posts');
           }
